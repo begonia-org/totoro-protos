@@ -9,14 +9,15 @@ TS_PROTO_PLUGIN = $(shell which protoc-gen-ts_proto)
 
 # 目标文件夹
 PROTO_DIR = .
-OUTPUT_DIR = ../pb
+OUTPUT_DIR = ../../
+PB_OUTPUT_DIR = $(OUTPUT_DIR)/totoro/pb
 MODELS_DIR= ../models
 COMMON_DIR= ../common
 # 生成的文件
 TS_OUTPUT_DIR="../api"
 # 文件列表
-PY_PROTO_FILES = $(wildcard $(PROTO_DIR)/*.proto)
-TS_PROTO_FILES = $(wildcard $(PROTO_DIR)/*.proto)
+PY_PROTO_FILES = $(wildcard $(PROTO_DIR)/totoro/pb/*.proto)
+TS_PROTO_FILES = $(wildcard $(PROTO_DIR)/totoro/pb/*.proto)
 
 PY_ARGS = --python_out=$(OUTPUT_DIR) \
           --pyi_out=$(OUTPUT_DIR) --grpc_python_out=$(OUTPUT_DIR) --pydantic_out=$(MODELS_DIR)
@@ -50,13 +51,13 @@ generate: make_dir py.print,common,desc
 
 py: $(PY_PROTO_FILES) | common
 	@mkdir -p $(MODELS_DIR)
-	@mkdir -p $(OUTPUT_DIR)
-	touch $(OUTPUT_DIR)/__init__.py
-	echo "#!/usr/bin/env python" > $(OUTPUT_DIR)/__init__.py
+	@mkdir -p $(PB_OUTPUT_DIR)
+	touch $(PB_OUTPUT_DIR)/__init__.py
+	echo "#!/usr/bin/env python" > $(PB_OUTPUT_DIR)/__init__.py
 	touch $(MODELS_DIR)/__init__.py
 	echo "#!/usr/bin/env python" > $(MODELS_DIR)/__init__.py
 	python3 -m grpc_tools.protoc --proto_path=$(PROTO_DIR) --proto_path=./common  $(PY_ARGS) $?
-	sed -i '/from/!s/import \(.*\) as/from . import \1 as/g' $(OUTPUT_DIR)/*pb2*.py
+	sed -i '/from/!s/import \(.*\) as/from . import \1 as/g' $(PB_OUTPUT_DIR)/*pb2*.py
 
 ts: $(TS_PROTO_FILES) | common
 	@mkdir -p $(TS_OUTPUT_DIR)
