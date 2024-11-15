@@ -140,3 +140,25 @@ message DocSearchVector{
     repeated double query_vector=5[json_name="query_vector"];
 
 }
+
+message TokenizerItem{
+    string token=1;
+    repeated string synonyms=2;
+    double weight=3;
+    repeated string fine_grained_tokens=4[json_name="fine_grained_tokens"];
+}   
+message TokenWeight{
+    string token=1;
+    double weight=2;
+}
+message TermWeightTokens{
+    repeated string tokens=1;
+    double weight=2;
+    repeated string synonyms_tokens=4[json_name="synonyms_tokens"];
+    repeated TokenizerItem sorted_weight_tokens=3[json_name="sorted_weight_tokens"];
+    bool isalnum=5;
+    repeated string synonyms = 6;
+    repeated TokenWeight token_weights=7[json_name="token_weights"];
+    bool is_chinese=8[json_name="is_chinese"];
+
+}
