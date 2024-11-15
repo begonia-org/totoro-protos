@@ -160,5 +160,6 @@ message TermWeightTokens{
     repeated string synonyms = 6;
     repeated TokenWeight token_weights=7[json_name="token_weights"];
     bool is_chinese=8[json_name="is_chinese"];
+    string term_weight_spilt_str=9[json_name="term_weight_spilt_str"];
 
 }
