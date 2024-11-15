@@ -17,6 +17,8 @@ message EmbeddingRequest{
     string model_api_key=7[json_name="model_api_key"];
     string doc_title=8[json_name="doc_title"];
     string task_id=9[json_name="task_id"];
+    repeated string important_keywords=19[json_name="important_keywords"];
+
 }
 
 

@@ -46,18 +46,14 @@ message Doc{
     string content_with_weight=9[json_name="content_with_weight"];
     string content_tokens=10[json_name="content_tokens"];
     string content_small_tokens=11[json_name="content_small_tokens"];
-    // string create_at=12[json_name="create_at"];
-    // int64 create_timestamp=13[json_name="create_timestamp"];
     string image_uri=14[json_name="image_uri"];
     repeated double q_vec=15[json_name="q_vec"];
     int32 q_vec_size=16[json_name="q_vec_size"];
     string image = 17;
-    // repeated string important_keyword=18[json_name="important_keyword"];
-    // repeated double q_512_vec=19[json_name="q_512_vec"];
-    // repeated double q_1024_vec=20[json_name="q_1024_vec"];
-    // repeated double q_768_vec=21[json_name="q_768_vec"];
-    // repeated double q_1536_vec=22[json_name="q_1536_vec"];
+    repeated string important_keywords=19[json_name="important_keywords"];
+    string important_keywords_tokens=20[json_name="important_keywords_tokens"];
     string file_key=23[json_name="file_key"];
+    string file_md5=24[json_name="file_md5"];
 }
 message Smilarity{
     repeated double simlarity = 1;
