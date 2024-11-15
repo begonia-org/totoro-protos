@@ -59,29 +59,42 @@ message QueryBuildRequest{
 message QueryBuildResponse{
     DocSearchVector vector=1;
     }
+message PreQuestionRequest{
+    string question=1;
+
+}
+message PreQuestionResponse{
+    TermWeightTokens term_weight_tokens=1;
+
+    }
 service  RAGCoreService{
-    rpc embedding(EmbeddingRequest) returns (EmbeddingResponse){
+    rpc EmbeddingDoc(EmbeddingRequest) returns (EmbeddingResponse){
         option (google.api.http) = {
             post: "/api/v1/rag/embedding"
             body: "*"
         };
     }
-    rpc reanking(ReankingRequest) returns (ReankingResponse){
+    rpc ReankingDoc(ReankingRequest) returns (ReankingResponse){
         option (google.api.http) = {
             post: "/api/v1/rag/reanking"
             body: "*"
         };
     }
-    rpc query(QueryBuildRequest) returns (QueryBuildResponse){
+    rpc BuildQuery(QueryBuildRequest) returns (QueryBuildResponse){
         option (google.api.http) = {
             post: "/api/v1/rag/query"
             body: "*"
         };
     }
-    rpc embedding_progress(EmbeddingProgressRequest) returns (DocDegreeProgress){
+    rpc ReadEmbeddingProgress(EmbeddingProgressRequest) returns (DocDegreeProgress){
         option (google.api.http) = {
             get: "/api/v1/rag/embedding/progess"
-            body: "*"
+        };
+
+    }
+    rpc PreQuestion(PreQuestionRequest) returns (PreQuestionResponse){
+        option (google.api.http) = {
+            get: "/api/v1/rag/pre_question"
         };
     }
 }
