@@ -64,7 +64,8 @@ message PreQuestionRequest{
 
 }
 message PreQuestionResponse{
-    TermWeightTokens term_weight_tokens=1;
+    repeated TermWeightTokens term_weight_tokens=1;
+    repeated string keywords = 2;
 
     }
 service  RAGCoreService{
